@@ -37,5 +37,5 @@ cron:
 0 5 * * * /home/mlman/scripts/sync-mailman.sh >> /tmp/sync-output.txt 2>&1  
 ```
 
-The sync is replacing hyperlink text: lists.boost.org.cpp.al. If the archive goes into production and replaces lists.boost.org then it will be better to continue to use the URL "lists.boost.org" to avoid breaking search engine results.  
+The sync is currently replacing hyperlink text: lists.boost.org.cpp.al. However, if the archive goes into production, it will be better to continue using the URL "lists.boost.org" to avoid breaking search results.  
 
