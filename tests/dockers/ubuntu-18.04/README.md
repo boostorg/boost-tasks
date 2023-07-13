@@ -28,7 +28,7 @@ docker exec -it _name_ bash
 
 Adjust the /etc/hosts file so all traffic is redirected to be internal. If you don't make this change, then you'll still interact with the internet, instead of only local testing.
 ```
-cat /opt/github/CPPAlliance/boost-tasks/tests/dockers/ubuntu-18.04/hosts >> /etc/hosts
+cat /opt/github/boostorg/boost-tasks/tests/dockers/ubuntu-18.04/hosts >> /etc/hosts
 ```
 
 Start additional required processes:
@@ -44,7 +44,7 @@ The above steps can also be accomplished with prepare.sh
 
 Run the various boost-tasks scripts:
 ```
-cd /opt/github/CPPAlliance/boost-tasks/
+cd /opt/github/boostorg/boost-tasks/
 ./mirror  # etc.
 ```
 

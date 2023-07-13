@@ -161,50 +161,58 @@ RUN mkdir -p /root/scripts && \
 # RUN wget https://dl.bintray.com/boostorg/master/boost_1_74_0-snapshot.tar.bz2
 
 # Download bintray releases
-RUN mkdir -p /var/www/html/boostorg.jfrog.io/artifactory/main/release/1.64.0/source
-WORKDIR /var/www/html/boostorg.jfrog.io/artifactory/main/release/1.64.0/source
-RUN wget https://boostorg.jfrog.io/artifactory/main/release/1.64.0/source/boost_1_64_0.tar.bz2
-RUN wget https://boostorg.jfrog.io/artifactory/main/release/1.64.0/source/boost_1_64_0.7z.json
-RUN wget https://boostorg.jfrog.io/artifactory/main/release/1.64.0/source/boost_1_64_0.tar.bz2.json
-RUN wget https://boostorg.jfrog.io/artifactory/main/release/1.64.0/source/boost_1_64_0.tar.gz.json
-RUN wget https://boostorg.jfrog.io/artifactory/main/release/1.64.0/source/boost_1_64_0.zip.json
+ARG DOWNLOADVERSION1=1.64.0
+ARG DOWNLOADVERSION1_UNDERSCORE=boost_1_64_0
+RUN mkdir -p /var/www/html/boostorg.jfrog.io/artifactory/main/release/${DOWNLOADVERSION1}/source
+WORKDIR /var/www/html/boostorg.jfrog.io/artifactory/main/release/${DOWNLOADVERSION1}/source
+RUN wget https://boostorg.jfrog.io/artifactory/main/release/${DOWNLOADVERSION1}/source/${DOWNLOADVERSION1_UNDERSCORE}.tar.bz2
+RUN wget https://boostorg.jfrog.io/artifactory/main/release/${DOWNLOADVERSION1}/source/${DOWNLOADVERSION1_UNDERSCORE}.7z.json
+RUN wget https://boostorg.jfrog.io/artifactory/main/release/${DOWNLOADVERSION1}/source/${DOWNLOADVERSION1_UNDERSCORE}.tar.bz2.json
+RUN wget https://boostorg.jfrog.io/artifactory/main/release/${DOWNLOADVERSION1}/source/${DOWNLOADVERSION1_UNDERSCORE}.tar.gz.json
+RUN wget https://boostorg.jfrog.io/artifactory/main/release/${DOWNLOADVERSION1}/source/${DOWNLOADVERSION1_UNDERSCORE}.zip.json
 
-RUN mkdir -p /var/www/html/boostorg.jfrog.io/artifactory/main/release/1.73.0/source
-WORKDIR /var/www/html/boostorg.jfrog.io/artifactory/main/release/1.73.0/source
-RUN wget https://boostorg.jfrog.io/artifactory/main/release/1.73.0/source/boost_1_73_0.tar.bz2
-RUN wget https://boostorg.jfrog.io/artifactory/main/release/1.73.0/source/boost_1_73_0.7z.json
-RUN wget https://boostorg.jfrog.io/artifactory/main/release/1.73.0/source/boost_1_73_0.tar.bz2.json
-RUN wget https://boostorg.jfrog.io/artifactory/main/release/1.73.0/source/boost_1_73_0.tar.gz.json
-RUN wget https://boostorg.jfrog.io/artifactory/main/release/1.73.0/source/boost_1_73_0.zip.json
+ARG DOWNLOADVERSION2=1.73.0
+ARG DOWNLOADVERSION2_UNDERSCORE=boost_1_73_0
+RUN mkdir -p /var/www/html/boostorg.jfrog.io/artifactory/main/release/${DOWNLOADVERSION2}/source
+WORKDIR /var/www/html/boostorg.jfrog.io/artifactory/main/release/${DOWNLOADVERSION2}/source
+RUN wget https://boostorg.jfrog.io/artifactory/main/release/${DOWNLOADVERSION2}/source/${DOWNLOADVERSION2_UNDERSCORE}.tar.bz2
+RUN wget https://boostorg.jfrog.io/artifactory/main/release/${DOWNLOADVERSION2}/source/${DOWNLOADVERSION2_UNDERSCORE}.7z.json
+RUN wget https://boostorg.jfrog.io/artifactory/main/release/${DOWNLOADVERSION2}/source/${DOWNLOADVERSION2_UNDERSCORE}.tar.bz2.json
+RUN wget https://boostorg.jfrog.io/artifactory/main/release/${DOWNLOADVERSION2}/source/${DOWNLOADVERSION2_UNDERSCORE}.tar.gz.json
+RUN wget https://boostorg.jfrog.io/artifactory/main/release/${DOWNLOADVERSION2}/source/${DOWNLOADVERSION2_UNDERSCORE}.zip.json
 
+ARG DOWNLOADVERSION3=1.83.0
+ARG DOWNLOADVERSION3_UNDERSCORE=boost_1_83_0-snapshot
 RUN mkdir -p /var/www/html/boostorg.jfrog.io/artifactory/main/develop
 WORKDIR /var/www/html/boostorg.jfrog.io/artifactory/main/develop
-RUN wget https://boostorg.jfrog.io/artifactory/main/develop/boost_1_77_0-snapshot.tar.bz2
-RUN wget https://boostorg.jfrog.io/artifactory/main/develop/boost_1_77_0-snapshot.7z.json
-RUN wget https://boostorg.jfrog.io/artifactory/main/develop/boost_1_77_0-snapshot.tar.bz2.json
-RUN wget https://boostorg.jfrog.io/artifactory/main/develop/boost_1_77_0-snapshot.tar.gz.json
-RUN wget https://boostorg.jfrog.io/artifactory/main/develop/boost_1_77_0-snapshot.zip.json
+RUN wget https://boostorg.jfrog.io/artifactory/main/develop/${DOWNLOADVERSION3_UNDERSCORE}.tar.bz2
+RUN wget https://boostorg.jfrog.io/artifactory/main/develop/${DOWNLOADVERSION3_UNDERSCORE}.7z.json
+RUN wget https://boostorg.jfrog.io/artifactory/main/develop/${DOWNLOADVERSION3_UNDERSCORE}.tar.bz2.json
+RUN wget https://boostorg.jfrog.io/artifactory/main/develop/${DOWNLOADVERSION3_UNDERSCORE}.tar.gz.json
+RUN wget https://boostorg.jfrog.io/artifactory/main/develop/${DOWNLOADVERSION3_UNDERSCORE}.zip.json
 
 RUN mkdir -p /var/www/html/boostorg.jfrog.io/artifactory/main/master
 WORKDIR /var/www/html/boostorg.jfrog.io/artifactory/main/master
-RUN wget https://boostorg.jfrog.io/artifactory/main/master/boost_1_77_0-snapshot.tar.bz2
-RUN wget https://boostorg.jfrog.io/artifactory/main/master/boost_1_77_0-snapshot.7z.json
-RUN wget https://boostorg.jfrog.io/artifactory/main/master/boost_1_77_0-snapshot.tar.bz2.json
-RUN wget https://boostorg.jfrog.io/artifactory/main/master/boost_1_77_0-snapshot.tar.gz.json
-RUN wget https://boostorg.jfrog.io/artifactory/main/master/boost_1_77_0-snapshot.zip.json
+RUN wget https://boostorg.jfrog.io/artifactory/main/master/${DOWNLOADVERSION3_UNDERSCORE}.tar.bz2
+RUN wget https://boostorg.jfrog.io/artifactory/main/master/${DOWNLOADVERSION3_UNDERSCORE}.7z.json
+RUN wget https://boostorg.jfrog.io/artifactory/main/master/${DOWNLOADVERSION3_UNDERSCORE}.tar.bz2.json
+RUN wget https://boostorg.jfrog.io/artifactory/main/master/${DOWNLOADVERSION3_UNDERSCORE}.tar.gz.json
+RUN wget https://boostorg.jfrog.io/artifactory/main/master/${DOWNLOADVERSION3_UNDERSCORE}.zip.json
 
 RUN mkdir -p /var/www/html/boostorg.jfrog.io/artifactory/api/storage/main
 WORKDIR /var/www/html/boostorg.jfrog.io/artifactory/api/storage/main
 RUN wget https://boostorg.jfrog.io/artifactory/api/storage/main/develop
 RUN wget https://boostorg.jfrog.io/artifactory/api/storage/main/master
 
-RUN mkdir -p /var/www/html/boostorg.jfrog.io/artifactory/main/beta/1.77.0.beta1/source/
-WORKDIR  /var/www/html/boostorg.jfrog.io/artifactory/main/beta/1.77.0.beta1/source/
-RUN wget https://boostorg.jfrog.io/artifactory/main/beta/1.77.0.beta1/source/boost_1_77_0_b1_rc1.tar.bz2
-RUN wget https://boostorg.jfrog.io/artifactory/main/beta/1.77.0.beta1/source/boost_1_77_0_b1_rc1.7z.json
-RUN wget https://boostorg.jfrog.io/artifactory/main/beta/1.77.0.beta1/source/boost_1_77_0_b1_rc1.tar.bz2.json
-RUN wget https://boostorg.jfrog.io/artifactory/main/beta/1.77.0.beta1/source/boost_1_77_0_b1_rc1.tar.gz.json
-RUN wget https://boostorg.jfrog.io/artifactory/main/beta/1.77.0.beta1/source/boost_1_77_0_b1_rc1.zip.json
+ARG DOWNLOADVERSION4=1.83.0.beta1
+ARG DOWNLOADVERSION4_UNDERSCORE=boost_1_83_0_b1
+RUN mkdir -p /var/www/html/boostorg.jfrog.io/artifactory/main/beta/${DOWNLOADVERSION4}/source/
+WORKDIR  /var/www/html/boostorg.jfrog.io/artifactory/main/beta/${DOWNLOADVERSION4}/source/
+RUN wget https://boostorg.jfrog.io/artifactory/main/beta/1.77.0.beta1/source/${DOWNLOADVERSION4_UNDERSCORE}.tar.bz2
+RUN wget https://boostorg.jfrog.io/artifactory/main/beta/1.77.0.beta1/source/${DOWNLOADVERSION4_UNDERSCORE}.7z.json
+RUN wget https://boostorg.jfrog.io/artifactory/main/beta/1.77.0.beta1/source/${DOWNLOADVERSION4_UNDERSCORE}.tar.bz2.json
+RUN wget https://boostorg.jfrog.io/artifactory/main/beta/1.77.0.beta1/source/${DOWNLOADVERSION4_UNDERSCORE}.tar.gz.json
+RUN wget https://boostorg.jfrog.io/artifactory/main/beta/1.77.0.beta1/source/${DOWNLOADVERSION4_UNDERSCORE}.zip.json
 
 # Clone all boostorg repos
 RUN mkdir -p /var/www/git/boostorg/
@@ -214,15 +222,14 @@ RUN cat /root/scripts/list_of_all_libraries.txt | xargs -I {} sh -c '{ cd {}.git
 RUN cat /root/scripts/list_of_all_libraries.txt | xargs -I {} sh -c '{ cd {}.git ; git checkout develop ; cd .. ; }'
 
 # Clone boost-tasks repo, over https
-RUN mkdir -p /var/www/git/CPPAlliance/
-WORKDIR /var/www/git/CPPAlliance
-RUN git clone https://github.com/CPPAlliance/boost-tasks 
-WORKDIR /var/www/git/CPPAlliance/boost-tasks
-RUN git checkout upload
-RUN git checkout dnljms2019
+RUN mkdir -p /var/www/git/boostorg/
+WORKDIR /var/www/git/boostorg
+RUN git clone https://github.com/boostorg/boost-tasks
+WORKDIR /var/www/git/boostorg/boost-tasks
+RUN git checkout php7
 RUN git checkout master
 RUN git config --file .git/config http.receivepack true
-RUN chmod -R 777 /var/www/git/CPPAlliance/boost-tasks/
+RUN chmod -R 777 /var/www/git/boostorg/boost-tasks/
 
 # Clone repos for ssh access
 RUN mkdir -p /home/git/boostorg
@@ -243,15 +250,15 @@ WORKDIR /var/www/html/api.github.com/repos/boostorg
 RUN cat /root/scripts/list_of_all_libraries.txt | xargs -I {} sh -c '{ mkdir -p {} ; curl -H "Authorization: token $GITHUBTOKEN" https://api.github.com/repos/boostorg/{}/pulls > {}/pulls; sleep 2 ; }'
 
 # Get boost-tasks
-RUN mkdir -p /opt/github/CPPAlliance
-WORKDIR /opt/github/CPPAlliance
-RUN git clone https://github.com/CPPAlliance/boost-tasks -b php5
+RUN mkdir -p /opt/github/boostorg
+WORKDIR /opt/github/boostorg
+RUN git clone https://github.com/boostorg/boost-tasks
 
 # Install composer
 RUN cd /tmp && \
     curl -sS https://getcomposer.org/installer | php && \
     mv composer.phar /usr/local/bin/composer 
-WORKDIR /opt/github/CPPAlliance/boost-tasks
+WORKDIR /opt/github/boostorg/boost-tasks
 RUN composer install
 
 COPY config.neon var/
@@ -275,5 +282,5 @@ RUN cd /opt/github && \
     cp dist/bin/quickbook /usr/local/bin/quickbook
 
 # LAST SECTION --------------------
-WORKDIR /opt/github/CPPAlliance/boost-tasks
+WORKDIR /opt/github/boostorg/boost-tasks
 CMD sleep 1000000000

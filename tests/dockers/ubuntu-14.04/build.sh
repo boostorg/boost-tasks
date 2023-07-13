@@ -6,4 +6,4 @@ if [ -z "$GITHUBTOKEN" ]; then
   exit 1
 fi
 
-docker build --build-arg GITHUBTOKEN=$GITHUBTOKEN .
+docker build --tag boost-tasks-1404 --build-arg GITHUBTOKEN=$GITHUBTOKEN .
