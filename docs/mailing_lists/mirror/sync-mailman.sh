@@ -5,16 +5,29 @@
 set -x
 date
 
-echo "--- rsyncing /opt/mailman"
-rsync -Pav -e "ssh -i $HOME/.ssh/id_rsa -o HostKeyAlgorithms=ssh-rsa,ssh-dss -o 'PubkeyAcceptedKeyTypes +ssh-rsa'" cppal@boost.org:/opt/mailman/ /opt/mailman/ || true
-echo "--- rsyncing /home/hyper-archives/"
-rsync -Pav -e "ssh -i $HOME/.ssh/id_rsa -o HostKeyAlgorithms=ssh-rsa,ssh-dss -o 'PubkeyAcceptedKeyTypes +ssh-rsa'" cppal@boost.org:/home/hyper-archives/ /home/hyper-archives/ || true
-echo "--- rsyncing /home/www/lists.boost.org/"
-rsync -Pav -e "ssh -i $HOME/.ssh/id_rsa -o HostKeyAlgorithms=ssh-rsa,ssh-dss -o 'PubkeyAcceptedKeyTypes +ssh-rsa'" cppal@boost.org:/home/www/lists.boost.org/ /home/www/lists.boost.org/ || true
+run_rsync="true"
+
+# Preflight check. Is the previous mailing list still in place?
+if curl -L https://lists.boost.org/ | grep "Click on a list name to get more information"; then
+    echo "Still on wowbagger. Proceeding."
+else
+    echo "Doesn't seem to be mailman2 anymore. Exiting."
+    exit 1
+fi
+
+if [ "${run_rsync}" = "true" ]; then
+    echo "--- rsyncing /opt/mailman"
+    rsync -Pav -e "ssh -i $HOME/.ssh/id_rsa -o HostKeyAlgorithms=ssh-rsa,ssh-dss -o 'PubkeyAcceptedKeyTypes +ssh-rsa'" cppal@original.boost.org:/opt/mailman/ /opt/mailman/ || true
+    echo "--- rsyncing /home/hyper-archives/"
+    rsync -Pav -e "ssh -i $HOME/.ssh/id_rsa -o HostKeyAlgorithms=ssh-rsa,ssh-dss -o 'PubkeyAcceptedKeyTypes +ssh-rsa'" cppal@original.boost.org:/home/hyper-archives/ /home/hyper-archives/ || true
+    echo "--- rsyncing /home/www/lists.boost.org/"
+    rsync -Pav -e "ssh -i $HOME/.ssh/id_rsa -o HostKeyAlgorithms=ssh-rsa,ssh-dss -o 'PubkeyAcceptedKeyTypes +ssh-rsa'" cppal@original.boost.org:/home/www/lists.boost.org/ /home/www/lists.boost.org/ || true
+
+fi
 
 echo "--- text replace in boost-old/index.php"
 findtext='header("Location: http://lists.boost.org/Archives/boost");'
-replacetext='header("Location: http://lists.boost.org.cpp.al/Archives/boost");'
+replacetext='header("Location: http://listarchives.boost.org/Archives/boost");'
 file='/home/hyper-archives/boost-old/index.php'
 sed -i "s~${findtext}~${replacetext}~" $file
 
@@ -77,13 +90,28 @@ cd /home/www/lists.boost.org/mailman/listinfo.cgi
 for list in $mailinglists; do
     wget https://lists.boost.org/mailman/listinfo.cgi/$list -O $list
     findtext="lists.boost.org/"
-    replacetext="lists.boost.org.cpp.al/"
+    replacetext="listarchives.boost.org/"
     sed -i "s~${findtext}~${replacetext}~" $list
 
-    # and another files
+    # and other files
     sed -i "s~${findtext}~${replacetext}~" /home/hyper-archives/$list/include/msg-footer.inc || echo "\nmsg-footer.inc not found in $list\n"
     sed -i "s~${findtext}~${replacetext}~" /home/hyper-archives/$list/include/index-footer.inc || echo "\nindex-footer.inc not found in $list\n"
     sed -i "s~${findtext}~${replacetext}~" /home/hyper-archives/$list/include/index-header.inc || echo "\nindex-header.inc not found in $list\n"
 done
 
+# 2025 further replacements
+for list in $mailinglists; do
+    findtext="lists.boost.org/"
+    replacetext="listarchives.boost.org/"
+    # SPECIFIC FILES, NOT ENOUGH:
+    # find /home/hyper-archives/$list/ -type f -name "*author.php" -exec sed -i "s~${findtext}~${replacetext}~" {} \;
+    # find /home/hyper-archives/$list/ -type f -name "*index.php" -exec sed -i "s~${findtext}~${replacetext}~" {} \;
+    # find /home/hyper-archives/$list/ -type f -name "*date.php" -exec sed -i "s~${findtext}~${replacetext}~" {} \;
+    # SLOW:
+    # find /home/hyper-archives/$list/ -type f -exec sed -i "s~${findtext}~${replacetext}~" {} \;
+    # LETS TRY UGREP:
+    ugrep -rl ${findtext} /home/hyper-archives/$list/ | xargs sed -i "s~${findtext}~${replacetext}~g"
+done
+
+date
 echo "Completed sync-mailman.sh"
